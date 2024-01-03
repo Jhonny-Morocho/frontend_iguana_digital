@@ -1,0 +1,34 @@
+
+<p-toast></p-toast>
+<form [formGroup]="formIntermediario" (ngSubmit)="crearLugar()">
+    <div class="col-12 md:col-12">
+        <div class="card p-fluid">
+            <div class="field">
+                <label htmlFor="lugar">Nombre</label>
+                <input 
+                pInputText [readonly]="modoLectura" 
+                (keypress)="validarLetras($event)"
+                [ngClass]="{'ng-invalid ng-dirty': lugar}" 
+                id="name1" 
+                style="text-transform: uppercase;" 
+                type="text" 
+                formControlName="lugar"  />
+
+                <span *ngIf="lugar && this.formIntermediario.get('lugar')?.errors?.['required']">
+                    <p class="text-red-600">(El lugar no puede quedar vacío)</p>
+                </span>
+
+            </div>
+        </div>
+        <div class="grid align-content-end text-right">
+            <div class="col-12">
+                <p-button    [routerLink]="['/admin/intermediario']" label="Regresar" *ngIf="!modoLectura">
+                    <i class="pi pi-arrow-left mr-2"></i>
+                </p-button>
+                <button type="Submit"   pButton icon="pi pi-check"label="Guardar" class="ml-2 p-button-success" *ngIf="!modoLectura"></button>
+
+            </div>
+        </div>
+
+    </div>
+</form>

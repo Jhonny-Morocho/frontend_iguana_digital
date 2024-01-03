@@ -1,0 +1,15 @@
+<div class="card ui-fluid animate__animated animate__fadeIn" >
+    <div class="col-12">
+        <h2>Editar Publicaciones</h2>
+    </div>
+    <app-formulario-publicaciones
+    [modeloPublicacion]="modeloPublicacionFull"
+    *ngIf="modeloPublicacionFull"
+    (onSubmitPublicaciones)="editarPublicacion($event)">
+    </app-formulario-publicaciones>
+    <p-toast></p-toast>
+    <div *ngIf="!modeloPublicacionFull" class="justify-content-center text-center">
+        <h5>Cargando...</h5>
+        <p-progressBar  mode="indeterminate"></p-progressBar>
+    </div>
+</div>
