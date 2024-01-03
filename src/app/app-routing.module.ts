@@ -12,8 +12,6 @@ import { AuthGuard } from './guard/auth.guard';
             { path: "admin",component:AdminComponent,children:[
                 { path: '', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
                 { path: 'usuario', loadChildren: () => import('./admin/usuario/usuario.module').then(m => m.UsuarioModule) },
-                { path: 'intermediario', loadChildren: () => import('./admin/intermediario/intermediario.module').then(m => m.IntermediarioModule) },
-                { path: 'publicaciones', loadChildren: () => import('./admin/publicaciones/publicaciones.module').then(m => m.PublicacionesModule) },
             ], canActivate: [AuthGuard]},
             {
 
