@@ -1,11 +1,12 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { UsuarioService } from '../../servicios/usuario.service';
-import { CrearUsuarioDTO, EditUsuarioDTO, UsuarioDTO, obtenerUsuarioDTO } from '../dto_usuario/usuario.model';
-
+import { CrearUsuarioDTO, DepartamentoDTO, FormUsuarioDTO, UsuarioDTO, obtenerUsuarioDTO } from '../dto_usuario/usuario.model';
+import { DepartamentosService } from '../../servicios/departamentos.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -21,38 +22,41 @@ export class FormularioUsuarioComponent implements OnInit {
   //output
   @Output() onSubmitUsuario:EventEmitter<CrearUsuarioDTO>=new EventEmitter<CrearUsuarioDTO>();
   //input
-  @Input() modeloUsuarioFormulario!: EditUsuarioDTO;
+  @Input() modeloUsuarioFormulario!: FormUsuarioDTO;
   @Input() modeloUnaUsuario!: obtenerUsuarioDTO;
   @Input() modoLectura!:boolean;
   //formulario
   formUsuario!:FormGroup;
   //
   idObtainForUpdate: string = '';
-
+  loadingDepartamentos:boolean=true;
+  subDepartamentos!:Subscription;
+  modeloDepartamentos!:DepartamentoDTO[];
+  instanciaDepartamento!:DepartamentoDTO;
   constructor(private formBuilder: FormBuilder,
     //public dialogService: ListarRolesComponent,
-    //public ref: DynamicDialogRef,
+    public ref: DynamicDialogRef,
     private usuarioService:UsuarioService,
+    private departamentosService:DepartamentosService,
     private router:Router,
     private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.iniciarFormulario();
     this.aplicarPatch();
+    this.cargarDepartamentos();
     this.usuarioService.refresh$.subscribe(()=>{
       this.router.navigate(['/admin/usuario']);
     });
   }
 
   aplicarPatch(){
-    debugger
     if(this.modeloUnaUsuario != undefined){
       this.modeloUsuarioFormulario = {
-        id: this.modeloUnaUsuario.id,
         departamento_id: this.modeloUnaUsuario.departamento_id,
         email: this.modeloUnaUsuario.email,
-        usuario: this.modeloUsuarioFormulario.usuario,
-        nombre:  this.modeloUsuarioFormulario.usuario,
+        usuario: this.modeloUnaUsuario.usuario,
+        nombre:  this.modeloUnaUsuario.nombre,
         apellido: this.modeloUnaUsuario.apellido
       }
       this.formUsuario.patchValue(this.modeloUsuarioFormulario);
@@ -67,17 +71,28 @@ export class FormularioUsuarioComponent implements OnInit {
       departamento_id: ['', Validators.required],
     });
   }
-
-
-crearUsuario():void{
-  this.submited = true;
-  if((this.formUsuario.value.password == this.formUsuario.value.password2) && this.formUsuario.valid){
-    this.passwordEquals = true;
-      //todo ok
-      this.formUsuario.controls['username'].setValue(this.formUsuario.value.username);
- let instanciaUsuarioCrear:CrearUsuarioDTO=this.formUsuario.value;
- this.onSubmitUsuario.emit(instanciaUsuarioCrear);
+  cargarDepartamentos(){
+    this.loadingDepartamentos=true;
+    this.subDepartamentos=this.departamentosService.obtenerTodos().subscribe(departamentos=>{
+        console.log(departamentos.data);
+        this.loadingDepartamentos=false;
+        this.modeloDepartamentos=departamentos.data;
+      },error=>{
+        this.loadingDepartamentos=false;
+        console.log(error);
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error vuelva a recargar la página'});
+      });
   }
+
+  crearUsuario():void{
+    this.submited = true;
+    if((this.formUsuario.value.password == this.formUsuario.value.password2) && this.formUsuario.valid){
+      this.passwordEquals = true;
+        //todo ok
+        this.formUsuario.controls['usuario'].setValue(this.formUsuario.value.usuario);
+  let instanciaUsuarioCrear:CrearUsuarioDTO=this.formUsuario.value;
+  this.onSubmitUsuario.emit(instanciaUsuarioCrear);
+    }
 
   if(!this.passwordEquals){
     this.passwordEquals = false;
@@ -89,19 +104,23 @@ crearUsuario():void{
     return;
   }
 
-
-
 }
-
+cerrarModal(){
+  this.ref.close();
+}
 handleChange(e: any) {
   let isChecked = e.checked;
   this.formUsuario.value.is_staff = isChecked
 }
+OnDestroy(){
+  if(this.subDepartamentos){
+    this.subDepartamentos.unsubscribe();
+  }
+}
 
-
-get username(){ return this.formUsuario.get('username');}
-get email(){ return this.formUsuario.get('email');}
+get departamentoNoValid(){return this.formUsuario.get('departamento_id')?.invalid && this.formUsuario.get('departamento_id')?.touched;}
+/* get email(){ return this.formUsuario.get('email');}
 get password(){ return this.formUsuario.get('password');}
 get password2(){ return this.formUsuario.get('password2');}
-get is_staff(){ return this.formUsuario.get('is_staff');}
+get is_staff(){ return this.formUsuario.get('is_staff');} */
 }

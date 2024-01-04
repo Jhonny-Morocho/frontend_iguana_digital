@@ -19,6 +19,7 @@ import {DialogModule} from 'primeng/dialog';
 import {PasswordModule} from 'primeng/password';
 import { VerUsuarioComponent } from './ver-usuario/ver-usuario.component';
 import {InputSwitchModule} from 'primeng/inputswitch';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 
@@ -43,7 +44,8 @@ import {InputSwitchModule} from 'primeng/inputswitch';
     DialogModule,
     ToastModule,
     PasswordModule,
-    InputSwitchModule
+    InputSwitchModule,
+    DropdownModule,
   ],
   providers: [MessageService],
 })

@@ -37,8 +37,7 @@ export interface UsuarioDTO{
  export interface RecuperarPasswordDTO{
     email: string;
  }
-export interface EditUsuarioDTO{
-  id: number ;
+export interface FormUsuarioDTO{
   departamento_id:number;
   nombre: string;
   apellido: string;

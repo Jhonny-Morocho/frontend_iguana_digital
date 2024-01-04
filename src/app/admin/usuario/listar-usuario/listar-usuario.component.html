@@ -3,10 +3,10 @@
     <div class="col-12">
         <div class="grid">
             <div class="col-2">
-                <p-button label="Agregar" icon="pi pi-plus"  [routerLink]="['/admin/usuario/crear']"></p-button>
+                <p-button label="Agregar" icon="pi pi-plus"  (onClick)="btnAgregar()"></p-button>
             </div>
             <div class="col-2">
-                <p-button label="Recargar" (onClick)="cargarUsuarios()"></p-button>
+                <p-button label="Recargar" (onClick)="cargarUsuarios()"  severity="info"></p-button>
             </div>
         </div>
     </div>
@@ -137,9 +137,18 @@
                 <td>
                     <span class="p-column-title">Acciones</span>
                     <div class="text-center pr-8">
-                        <i class="pi pi-eye pl-3" (click)="btnVerUsuario(usuario)"></i>
-                        <i class="pi pi-pencil pl-3" (click)="btnEditarUsuario(usuario)"></i>
-                        <i class="pi pi-trash pl-3" (click)="btnEliminarUsuario(usuario)"></i>
+                        <button
+                            pButton     
+                            icon="pi pi-pencil" 
+                            (click)="btnEditarUsuario(usuario)" 
+                            class="p-button-raised p-button-rounded mr-2">
+                        </button>
+                        <button 
+                            pButton
+                            class="p-button-danger p-button-rounded"    
+                            icon="pi pi-trash" 
+                            (click)="btnEliminarUsuario(usuario)">
+                        </button>
                     </div>
                 </td>
             </tr>

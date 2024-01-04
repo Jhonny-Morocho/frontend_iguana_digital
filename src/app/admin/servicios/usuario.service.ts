@@ -21,19 +21,6 @@ export class UsuarioService {
   }
 
 
-  /*checkServerStatus() {
-    this.http.get<LitarUsuarioDTO[]>(`${this.apiURL}/users`)
-      .subscribe(
-        data => {
-          return console.log('Server is up and running')},
-        error => {
-          return console.log('Server is down');
-          // Handle error
-        }
-      );
-  }*/
-
-
 
   public crear(usuario: CrearUsuarioDTO) {
     debugger
