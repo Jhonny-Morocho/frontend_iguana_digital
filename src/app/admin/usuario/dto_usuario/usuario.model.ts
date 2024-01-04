@@ -34,18 +34,23 @@ export interface UsuarioDTO{
  }
 export interface EditUsuarioDTO{
   id: number ;
-  username:string;
+  departamento_id:number;
+  nombre: string;
+  apellido: string;
+  usuario: string;
   email: string;
-  password: string;
-  password2: string;
-  is_staff: boolean;
 }
 
 export interface obtenerUsuarioDTO{
-  id: number;
-  username:string;
+  id: number ;
+  departamento_id:number;
+  nombre: string;
+  apellido: string;
+  usuario: string;
   email: string;
-  is_staff: boolean;
+  created_at: string;
+  updated_at: string;
+  departamento:DepartamentoDTO
 }
 
 

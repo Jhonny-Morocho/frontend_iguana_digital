@@ -47,33 +47,26 @@ export class FormularioUsuarioComponent implements OnInit {
   aplicarPatch(){
 
     if(this.modeloUnaUsuario != undefined){
-      console.log('this.modeloUnaUsuario.id')
-    console.log(this.modeloUnaUsuario.id)
-    this.modeloUsuario = {
-      id: this.modeloUnaUsuario.id,
-      username: this.modeloUnaUsuario.username,
-      email: this.modeloUnaUsuario.email,
-      password: '',
-      password2: '',
-      is_staff: this.modeloUnaUsuario.is_staff
+      this.modeloUsuario = {
+        id: this.modeloUnaUsuario.id,
+        departamento_id: this.modeloUnaUsuario.departamento_id,
+        email: this.modeloUnaUsuario.email,
+        usuario: this.modeloUsuario.usuario,
+        nombre:  this.modeloUsuario.usuario,
+        apellido: this.modeloUnaUsuario.apellido
+      }
     }
-    }
-
     if(this.modeloUsuario!=undefined || this.modeloUsuario!=null){
       this.formUsuario.patchValue(this.modeloUsuario);
-
-
     }
   }
   iniciarFormulario(){
     this.formUsuario = this.formBuilder.group({
-      username: ['', [Validators.required]],
+      usuario: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      password2: ['', Validators.required],
-      is_staff: ['false', Validators.required],
-    }, {
-      validators: this.comparandoPassword('password', 'password2')
+      nombre: ['', Validators.required],
+      apellido: ['', Validators.required],
+      departamento_id: ['', Validators.required],
     });
   }
 

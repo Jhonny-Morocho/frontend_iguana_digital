@@ -76,8 +76,8 @@ export class ListarUsuarioComponent implements OnInit, OnDestroy  {
   }
 
   btnEditarUsuario(usuario:UsuarioDTO){
-    this.ref=this.dialogService.open(VerUsuarioComponent, {
-      header: 'Datos del usuario',
+    this.ref=this.dialogService.open(EditarUsuarioComponent, {
+      header: 'Actualizar datos del usuario',
       width: '50%',
       data:usuario
     });
