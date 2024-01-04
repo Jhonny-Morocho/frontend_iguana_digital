@@ -59,16 +59,4 @@ obtenerPrimeraLetra(): string {
     return this.usuarioLogueado.charAt(0).toUpperCase();
   }
 
-logout(value: any){
-    this.usuarioSevice.logout().subscribe((response) =>{
-        console.log(response.data)
-        this.router.navigate(['/home']);
-    },error=>{
-        let message= error.error?.message;
-        console.log(message);
-        this.messageService.add({severity:'error', summary: 'Error', detail: message});
-        this.router.navigate(['/home']);
-      });
-
-}
 }

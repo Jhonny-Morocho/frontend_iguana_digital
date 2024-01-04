@@ -6,7 +6,7 @@
 export const environment = {
   production: true,
   dominio:'',
-  apiURL:'https://127.0.0.1:8000'
+  apiURL:'http://localhost:8000/index.php/api'
   //apiURL: 'http://127.0.0.1:8000'
 };
 

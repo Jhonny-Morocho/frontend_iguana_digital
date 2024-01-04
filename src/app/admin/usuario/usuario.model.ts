@@ -8,7 +8,10 @@
 
 export interface LitarUsuarioDTO{
   id: number ;
-  username:string;
+  departamento_id:number;
+  nombre: string;
+  apellido: string;
+  usuario: string;
   email: string;
 }
 export interface UsuarioDTO{

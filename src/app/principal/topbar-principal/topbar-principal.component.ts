@@ -56,20 +56,5 @@ export class TopbarPrincipalComponent implements OnInit {
         return this.usuarioLogueado.charAt(0).toUpperCase();
     }
 
-    logout() {
-
-
-        this.usuarioSevice.logout().subscribe(
-            (response) => {
-                console.log(response);
-            },
-            (error) => {
-                this.messageService.add({
-                    severity: 'error',
-                    summary: 'Error',
-                    detail: 'Debes iniciar sesión',
-                });
-            }
-        );
-    }
+   
 }
