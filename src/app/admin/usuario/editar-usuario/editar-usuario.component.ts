@@ -5,7 +5,6 @@ import Swal from 'sweetalert2';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { CrearUsuarioDTO, UsuarioDTO, obtenerUsuarioDTO } from '../dto_usuario/usuario.model';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   providers: [MessageService],
@@ -35,10 +34,7 @@ export class EditarUsuarioComponent implements OnInit {
 
 
   constructor(private usuarioService:UsuarioService,
-    //public dialogService: FormularioRolComponent,
-    //public ref: DynamicDialogRef,
-    //public config: DynamicDialogConfig,
-    private activatedRoute:ActivatedRoute,
+    public config: DynamicDialogConfig,
     private messageService: MessageService,) { }
 
   ngOnInit(): void {
@@ -63,13 +59,12 @@ export class EditarUsuarioComponent implements OnInit {
     );
   }
   obtenerUsuarioPorId(){
-    this.activatedRoute.params.subscribe((response:any)=>{
-        this.usuarioService.obtenerUsuarioPorId(Number(response.id)).subscribe(response=>{
-          this.modeloUsuario=response.data;
-        },error=>{
-          console.log(error);
-        });
-    })
+    this.usuarioService.obtenerUsuarioPorId(this.config.data.id).subscribe(response=>{
+      this.modeloUsuario=response.data;
+    },error=>{
+      console.log(error);
+      this.messageService.add({severity:'error', summary: 'Error', detail: error.error?.message});
+    });
   }
 
   ngOnDestroy(): void {

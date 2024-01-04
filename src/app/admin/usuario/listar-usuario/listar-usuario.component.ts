@@ -51,10 +51,12 @@ export class ListarUsuarioComponent implements OnInit, OnDestroy  {
     });
   }
   cargarUsuarios():void{
+    this.loading=true;
     this.subCargarUsuarios=this.usuarioService.obtenerTodos().subscribe(usuarios=>{
       this.loading=false;
       this.listarUsuarios=usuarios.data;
     },error=>{
+      this.loading=false;
       let message= error.error.message;
       this.messageService.add({severity:'error', summary: 'Error', detail: message});
     });
@@ -87,7 +89,7 @@ export class ListarUsuarioComponent implements OnInit, OnDestroy  {
     
     Swal.fire({
       title: '¿ Esta seguro en eliminar ?',
-      text: usuario.username,
+      text: usuario.usuario,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

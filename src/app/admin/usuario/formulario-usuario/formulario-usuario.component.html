@@ -7,7 +7,7 @@
                 <div class="field">
                     <label htmlFor="username">Username</label>
                     <input pInputText id="name1"  type="text" formControlName="usuario"/>
-                     <span *ngIf="submited && this.formUsuario.get('username')?.errors?.['required']">
+                     <span *ngIf="submited && this.formUsuario.get('usuario')?.errors?.['required']">
                         <p class="text-red-600">(El username no puede quedar vacío)</p>
                     </span>
                 </div>
@@ -30,7 +30,7 @@
                     <label htmlFor="username">Nombres</label>
                     <input pInputText id="name1"  type="text" formControlName="nombre"/>
                      <span *ngIf="submited && this.formUsuario.get('nombre')?.errors?.['required']">
-                        <p class="text-red-600">(El username no puede quedar vacío)</p>
+                        <p class="text-red-600">(El Nombre no puede quedar vacío)</p>
                     </span>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                     <label htmlFor="email">Apellidos</label>
                     <input pInputText id="name1" type="text" formControlName="apellido"  />
                     <span *ngIf="submited && this.formUsuario.get('apellido')?.errors?.['required']">
-                        <p class="text-red-600">(El email no puede quedar vacío)</p>
+                        <p class="text-red-600">(El Apellido no puede quedar vacío)</p>
                     </span>
 
                 </div>

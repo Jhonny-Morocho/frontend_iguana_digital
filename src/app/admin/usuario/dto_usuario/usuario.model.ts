@@ -25,9 +25,14 @@ export interface DepartamentoDTO{
 }
 export interface UsuarioDTO{
   id: number ;
-  username:string;
+  departamento_id:number;
+  nombre: string;
+  apellido: string;
+  usuario: string;
   email: string;
-  is_staff: boolean;
+  created_at: string;
+  updated_at: string;
+  departamento:DepartamentoDTO
 }
  export interface RecuperarPasswordDTO{
     email: string;

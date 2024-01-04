@@ -21,7 +21,7 @@ export class FormularioUsuarioComponent implements OnInit {
   //output
   @Output() onSubmitUsuario:EventEmitter<CrearUsuarioDTO>=new EventEmitter<CrearUsuarioDTO>();
   //input
-  @Input() modeloUsuario!: EditUsuarioDTO;
+  @Input() modeloUsuarioFormulario!: EditUsuarioDTO;
   @Input() modeloUnaUsuario!: obtenerUsuarioDTO;
   @Input() modoLectura!:boolean;
   //formulario
@@ -45,19 +45,17 @@ export class FormularioUsuarioComponent implements OnInit {
   }
 
   aplicarPatch(){
-
+    debugger
     if(this.modeloUnaUsuario != undefined){
-      this.modeloUsuario = {
+      this.modeloUsuarioFormulario = {
         id: this.modeloUnaUsuario.id,
         departamento_id: this.modeloUnaUsuario.departamento_id,
         email: this.modeloUnaUsuario.email,
-        usuario: this.modeloUsuario.usuario,
-        nombre:  this.modeloUsuario.usuario,
+        usuario: this.modeloUsuarioFormulario.usuario,
+        nombre:  this.modeloUsuarioFormulario.usuario,
         apellido: this.modeloUnaUsuario.apellido
       }
-    }
-    if(this.modeloUsuario!=undefined || this.modeloUsuario!=null){
-      this.formUsuario.patchValue(this.modeloUsuario);
+      this.formUsuario.patchValue(this.modeloUsuarioFormulario);
     }
   }
   iniciarFormulario(){
@@ -68,25 +66,6 @@ export class FormularioUsuarioComponent implements OnInit {
       apellido: ['', Validators.required],
       departamento_id: ['', Validators.required],
     });
-  }
-
-
-  comparandoPassword(password: string, password2: string){
-
-    return (group: FormGroup) => {
-
-      let contra1 = group.controls[password].value;
-      let contra2 = group.controls[password2].value;
-
-      if(contra1 === contra2){
-        return null;
-      }
-
-
-      return {
-        comparandoPassword: true
-      };
-    };
   }
 
 

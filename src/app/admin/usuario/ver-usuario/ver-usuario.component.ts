@@ -13,20 +13,20 @@ import { obtenerUsuarioDTO } from '../dto_usuario/usuario.model';
 })
 export class VerUsuarioComponent implements OnInit {
 
-        //input
-        @Input() modeloUsuario!:obtenerUsuarioDTO;
+    //input
+    @Input() modeloUsuario!:obtenerUsuarioDTO;
 
-        Toast = Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true,
-          didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-          }
-        })
+    Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
 
   constructor(private cantonService:UsuarioService,
     public ref: DynamicDialogRef, 
