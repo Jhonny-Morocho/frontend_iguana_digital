@@ -35,6 +35,7 @@ export class EditarUsuarioComponent implements OnInit {
 
   constructor(private usuarioService:UsuarioService,
     public config: DynamicDialogConfig,
+    public ref: DynamicDialogRef,
     private messageService: MessageService,) { }
 
   ngOnInit(): void {
@@ -46,11 +47,11 @@ export class EditarUsuarioComponent implements OnInit {
     this.subs = this.usuarioService.editar(this.modeloUsuario.id,instanciaUsuarioEditar).subscribe(
     (response: any) => {
 
+      this.ref.close();
       this.Toast.fire({
         icon: 'success',
         title: response.message
       })
-      //this.ref.close();
       },
       (error) => {
         console.log(error);

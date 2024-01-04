@@ -38,7 +38,6 @@ export class CrearUsuarioComponent implements OnInit, OnDestroy  {
   }
 
   crearUsuario(instanciaUsuarioCrear:CrearUsuarioDTO){
-    debugger
     this.isLaoding = true;
     this.subs = this.usuarioService.crear(instanciaUsuarioCrear).subscribe(
     (response: any) => {

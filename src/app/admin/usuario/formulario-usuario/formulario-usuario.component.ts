@@ -33,20 +33,14 @@ export class FormularioUsuarioComponent implements OnInit {
   modeloDepartamentos!:DepartamentoDTO[];
   instanciaDepartamento!:DepartamentoDTO;
   constructor(private formBuilder: FormBuilder,
-    //public dialogService: ListarRolesComponent,
     public ref: DynamicDialogRef,
-    private usuarioService:UsuarioService,
     private departamentosService:DepartamentosService,
-    private router:Router,
     private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.iniciarFormulario();
     this.aplicarPatch();
     this.cargarDepartamentos();
-    this.usuarioService.refresh$.subscribe(()=>{
-      this.router.navigate(['/admin/usuario']);
-    });
   }
 
   aplicarPatch(){
@@ -76,6 +70,13 @@ export class FormularioUsuarioComponent implements OnInit {
         console.log(departamentos.data);
         this.loadingDepartamentos=false;
         this.modeloDepartamentos=departamentos.data;
+        const departamento=this.modeloDepartamentos.find(departamento=>{
+          return departamento.id=this.modeloUnaUsuario.departamento.id;
+        });
+        if(departamento){
+          this.instanciaDepartamento=departamento;
+        }
+
       },error=>{
         this.loadingDepartamentos=false;
         console.log(error);
