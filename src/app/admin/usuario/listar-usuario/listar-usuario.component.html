@@ -138,7 +138,7 @@
                     <span class="p-column-title">Acciones</span>
                     <div class="text-center pr-8">
                         <i class="pi pi-eye pl-3" (click)="btnVerUsuario(usuario)"></i>
-                        <i class="pi pi-pencil pl-3" [routerLink]="['/admin/usuario/editar',usuario.id]"></i>
+                        <i class="pi pi-pencil pl-3" (click)="btnEditarUsuario(usuario)"></i>
                         <i class="pi pi-trash pl-3" (click)="btnEliminarUsuario(usuario)"></i>
                     </div>
                 </td>

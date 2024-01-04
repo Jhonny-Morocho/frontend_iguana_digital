@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CrearUsuarioDTO, LitarUsuarioDTO, UsuarioDTO } from '../usuario/usuario.model';
+import { CrearUsuarioDTO, LitarUsuarioDTO, UsuarioDTO } from '../usuario/dto_usuario/usuario.model';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Router } from '@angular/router';

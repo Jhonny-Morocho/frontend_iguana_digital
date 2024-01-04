@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
-import { LitarUsuarioDTO, UsuarioDTO } from '../usuario.model';
+import { LitarUsuarioDTO, UsuarioDTO } from '../dto_usuario/usuario.model';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { CrearUsuarioComponent } from '../crear-usuario/crear-usuario.component';
 import { EditarUsuarioComponent } from '../editar-usuario/editar-usuario.component';
@@ -66,13 +66,6 @@ export class ListarUsuarioComponent implements OnInit, OnDestroy  {
       width: '50%'
     });
   }
-  btnEditarUsuario(usuario:UsuarioDTO){
-    this.ref=this.dialogService.open(EditarUsuarioComponent, {
-      header: 'Editar Usuario',
-      width: '50%',
-      data:usuario
-    });
-  }
 
   btnVerUsuario(usuario:UsuarioDTO){
     this.ref=this.dialogService.open(VerUsuarioComponent, {
@@ -82,6 +75,13 @@ export class ListarUsuarioComponent implements OnInit, OnDestroy  {
     });
   }
 
+  btnEditarUsuario(usuario:UsuarioDTO){
+    this.ref=this.dialogService.open(VerUsuarioComponent, {
+      header: 'Datos del usuario',
+      width: '50%',
+      data:usuario
+    });
+  }
   
   btnEliminarUsuario(usuario:UsuarioDTO){
     

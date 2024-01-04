@@ -48,8 +48,5 @@ export interface obtenerUsuarioDTO{
   is_staff: boolean;
 }
 
-export interface LoginUsuarioDTO{
-  username: string;
-  password:string;
-}
+
 

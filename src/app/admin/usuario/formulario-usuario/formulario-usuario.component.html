@@ -36,23 +36,6 @@
 
                 </div>
             </div>
-            <div class="col-6">
-                <div class="field">
-                    <label htmlFor="password2">Password</label>
-                    <p-password formControlName="password2"  [toggleMask]="true"></p-password>
-
-                    <span *ngIf="submited && this.formUsuario.get('password2')?.errors?.['required']">
-                        <p class="text-red-600">(El password no puede quedar vacío)</p>
-                    </span>
-
-                    <div class="form-group" *ngIf=" comparandoPassword && formUsuario.errors?.['comparandoPassword'] && !formUsuario.pristine" >
-                        <p class="text-red-600">
-                          Las contraseñas deben ser iguales
-                        </p>
-                      </div>
-                </div>
-
-            </div>
         </div>
         <div class="grid">
             <div class="col">

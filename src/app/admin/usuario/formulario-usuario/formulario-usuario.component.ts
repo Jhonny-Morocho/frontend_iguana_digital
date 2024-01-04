@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { UsuarioService } from '../../servicios/usuario.service';
-import { CrearUsuarioDTO, EditUsuarioDTO, UsuarioDTO, obtenerUsuarioDTO } from '../usuario.model';
+import { CrearUsuarioDTO, EditUsuarioDTO, UsuarioDTO, obtenerUsuarioDTO } from '../dto_usuario/usuario.model';
 
 
 

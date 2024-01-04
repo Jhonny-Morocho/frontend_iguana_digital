@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { UsuarioService } from '../../servicios/usuario.service';
-import { CrearUsuarioDTO, UsuarioDTO, obtenerUsuarioDTO } from '../usuario.model';
+import { CrearUsuarioDTO, UsuarioDTO, obtenerUsuarioDTO } from '../dto_usuario/usuario.model';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

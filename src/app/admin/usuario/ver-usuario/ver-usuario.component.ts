@@ -3,7 +3,7 @@ import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef} from 'primeng/dynamicdialog';
 import Swal from 'sweetalert2';
 import { UsuarioService } from '../../servicios/usuario.service';
-import { obtenerUsuarioDTO } from '../usuario.model';
+import { obtenerUsuarioDTO } from '../dto_usuario/usuario.model';
 
 @Component({
   providers: [MessageService],

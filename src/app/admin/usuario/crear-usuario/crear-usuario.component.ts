@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subscription } from 'rxjs';
 import { UsuarioService } from '../../servicios/usuario.service';
-import { CrearUsuarioDTO } from '../usuario.model';
+import { CrearUsuarioDTO } from '../dto_usuario/usuario.model';
 
 @Component({
   providers: [MessageService],
