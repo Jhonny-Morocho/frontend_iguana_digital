@@ -23,7 +23,6 @@ export class UsuarioService {
 
 
   public crear(usuario: CrearUsuarioDTO) {
-    debugger
     return this.http.post<boolean>(`${this.apiURL}/users`, usuario)  //envia el contenido del form al backend (web api)
     .pipe(
       tap(() => {
@@ -33,7 +32,7 @@ export class UsuarioService {
   }
 
   public editar(id: number, usuario: CrearUsuarioDTO){
-    console.log('ID:'+id);
+    debugger
     return this.http.put(`${this.apiURL}/users/${id}`, usuario).pipe(
       tap(() => {
         this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente

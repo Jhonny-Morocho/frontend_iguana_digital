@@ -14,7 +14,7 @@ import { CrearUsuarioDTO, UsuarioDTO, obtenerUsuarioDTO } from '../dto_usuario/u
 })
 export class EditarUsuarioComponent implements OnInit {
 
-
+  isLaoding!:boolean;
 
   modeloUsuario!:obtenerUsuarioDTO;
   //suscriptio
@@ -43,10 +43,11 @@ export class EditarUsuarioComponent implements OnInit {
     this.obtenerUsuarioPorId();
   }
   editarUsuario(instanciaUsuarioEditar:CrearUsuarioDTO){
-
-    this.subs = this.usuarioService.editar(this.modeloUsuario.id,instanciaUsuarioEditar).subscribe(
+    debugger
+    this.isLaoding=true;
+    this.subs = this.usuarioService.editar(this.config.data.id,instanciaUsuarioEditar).subscribe(
     (response: any) => {
-
+      this.isLaoding=false;
       this.ref.close();
       this.Toast.fire({
         icon: 'success',
@@ -54,6 +55,7 @@ export class EditarUsuarioComponent implements OnInit {
       })
       },
       (error) => {
+        this.isLaoding=false;
         console.log(error);
         this.messageService.add({severity:'error', summary: 'Error', detail: error.error?.message});
         console.error(error)}

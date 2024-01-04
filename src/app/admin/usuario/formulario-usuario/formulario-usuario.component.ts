@@ -76,7 +76,6 @@ export class FormularioUsuarioComponent implements OnInit {
         if(departamento){
           this.instanciaDepartamento=departamento;
         }
-
       },error=>{
         this.loadingDepartamentos=false;
         console.log(error);

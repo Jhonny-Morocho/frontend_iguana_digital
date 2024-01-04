@@ -6,6 +6,7 @@
     [modeloUnaUsuario]="modeloUsuario"
     *ngIf="modeloUsuario"
     [modoLectura]="false"
+    [isLaoding]="isLaoding"
     (onSubmitUsuario)="editarUsuario($event)">
     </app-formulario-usuario>
     <p-toast></p-toast>
