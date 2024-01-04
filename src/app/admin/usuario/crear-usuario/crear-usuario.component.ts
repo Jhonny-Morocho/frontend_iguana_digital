@@ -14,7 +14,7 @@ import { CrearUsuarioDTO } from '../dto_usuario/usuario.model';
 })
 export class CrearUsuarioComponent implements OnInit, OnDestroy  {
 
-
+  isLaoding!:boolean;
   subs!:Subscription;
   //toas
   Toast = Swal.mixin({
@@ -31,23 +31,23 @@ export class CrearUsuarioComponent implements OnInit, OnDestroy  {
 
   constructor(private messageService: MessageService,
     //public dialogService: FormularioRolComponent,
-    //public ref: DynamicDialogRef,
+    public ref: DynamicDialogRef,
     private usuarioService:UsuarioService) { }
 
   ngOnInit(): void {
   }
 
   crearUsuario(instanciaUsuarioCrear:CrearUsuarioDTO){
-
+    debugger
+    this.isLaoding = true;
     this.subs = this.usuarioService.crear(instanciaUsuarioCrear).subscribe(
     (response: any) => {
 
+      this.ref.close();
       this.Toast.fire({
         icon: 'success',
         title: response.message
       })
-      //this.ref.cerrarModal();
-      //this.ref.close();
       },
       (error) => {
         let message= error.error.message;

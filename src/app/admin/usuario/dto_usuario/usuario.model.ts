@@ -1,9 +1,9 @@
   export interface CrearUsuarioDTO{
-    username:string;
+    departamento_id: number;
+    nombre: string;
+    apellido: string;
+    usuario:string;
     email: string;
-    password: string;
-    password2: string;
-    is_staff: boolean;
 }
 
 export interface LitarUsuarioDTO{

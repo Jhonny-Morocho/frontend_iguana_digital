@@ -8,7 +8,7 @@
                     <span class="text-red-600">*</span>
                     <label htmlFor="username">Username</label>
                     <input pInputText id="name1"  type="text" formControlName="usuario"/>
-                     <span *ngIf="submited && this.formUsuario.get('usuario')?.errors?.['required']">
+                     <span *ngIf="getCampoNoValido('usuario') && this.formUsuario.get('usuario')?.errors?.['required']">
                         <p class="text-red-600">(El username no puede quedar vacío)</p>
                     </span>
                 </div>
@@ -19,7 +19,7 @@
                     <label htmlFor="email">Email</label>
                     <input pInputText id="name1" type="email" formControlName="email"  />
 
-                    <span *ngIf="submited && this.formUsuario.get('email')?.errors?.['required']">
+                    <span *ngIf="getCampoNoValido('email') && this.formUsuario.get('email')?.errors?.['required']">
                         <p class="text-red-600">(El email no puede quedar vacío)</p>
                     </span>
 
@@ -32,7 +32,7 @@
                     <span class="text-red-600">*</span>
                     <label htmlFor="username">Nombres</label>
                     <input pInputText id="name1"  type="text" formControlName="nombre"/>
-                     <span *ngIf="submited && this.formUsuario.get('nombre')?.errors?.['required']">
+                     <span *ngIf="getCampoNoValido('nombre') && this.formUsuario.get('nombre')?.errors?.['required']">
                         <p class="text-red-600">(El Nombre no puede quedar vacío)</p>
                     </span>
                 </div>
@@ -42,7 +42,7 @@
                     <span class="text-red-600">*</span>
                     <label htmlFor="email">Apellidos</label>
                     <input pInputText id="name1" type="text" formControlName="apellido"  />
-                    <span *ngIf="submited && this.formUsuario.get('apellido')?.errors?.['required']">
+                    <span *ngIf="getCampoNoValido('apellido') &&  this.formUsuario.get('apellido')?.errors?.['required']">
                         <p class="text-red-600">(El Apellido no puede quedar vacío)</p>
                     </span>
 
@@ -66,7 +66,7 @@
                             [showClear]="true">
                         </p-dropdown>
                     </div>
-                    <span *ngIf="departamentoNoValid && formUsuario.get('departamento_id')?.errors?.['required']">
+                    <span *ngIf="getCampoNoValido('departamento_id') && formUsuario.get('departamento_id')?.errors?.['required']">
                             <p class="text-red-600">*Campo Requerido</p>
                     </span>
                 </div>
@@ -76,9 +76,16 @@
     <div class="col-12">
         <div class="grid align-content-end text-right">
             <div class="col-12">
-                <button type="button"    pButton (click)="cerrarModal()" label="Cerrar" *ngIf="!modoLectura" severity="danger" class="p-button-danger">
+                <button type="button"    pButton (click)="cerrarModal()" label="Cerrar" *ngIf="!modoLectura" severity="danger" class="p-button-danger" >
                 </button>
-                <button type="Submit"   pButton icon="pi pi-check" label="Guardar" class="ml-2 p-button-success" *ngIf="!modoLectura"></button>
+                <button type="Submit"   
+                    pButton label="Guardar" 
+                    class="ml-2 p-button-success" 
+                    [disabled]="isLaoding"
+                    *ngIf="!modoLectura">
+                    <i class="pi pi-check" *ngIf="!isLaoding"></i>
+                    <i class="pi pi-spin pi-spinner"  *ngIf="isLaoding"></i>
+                </button>
             </div>
         </div>
     </div>

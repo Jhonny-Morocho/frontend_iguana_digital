@@ -17,8 +17,7 @@ import { Subscription } from 'rxjs';
 })
 export class FormularioUsuarioComponent implements OnInit {
 
-  submited: any = false;
-  passwordEquals: boolean = false;
+  @Input() isLaoding: boolean = false;
   //output
   @Output() onSubmitUsuario:EventEmitter<CrearUsuarioDTO>=new EventEmitter<CrearUsuarioDTO>();
   //input
@@ -85,42 +84,32 @@ export class FormularioUsuarioComponent implements OnInit {
   }
 
   crearUsuario():void{
-    this.submited = true;
-    if((this.formUsuario.value.password == this.formUsuario.value.password2) && this.formUsuario.valid){
-      this.passwordEquals = true;
-        //todo ok
-        this.formUsuario.controls['usuario'].setValue(this.formUsuario.value.usuario);
-  let instanciaUsuarioCrear:CrearUsuarioDTO=this.formUsuario.value;
-  this.onSubmitUsuario.emit(instanciaUsuarioCrear);
+    if(this.formUsuario.invalid){
+      this.messageService.add({severity:'info', summary: 'Success', detail: 'Debe completar todos los campos'});
+      return Object.values(this.formUsuario.controls).forEach(control=>{
+          control.markAsTouched();
+      });
     }
-
-  if(!this.passwordEquals){
-    this.passwordEquals = false;
-    this.messageService.add({severity:'error', summary: 'Error', detail: 'Las contraseñas no coinciden'});
+    //todo ok
+    let  instanciaUsuarioCrear:FormUsuarioDTO=this.formUsuario.value;
+    instanciaUsuarioCrear.departamento_id=this.instanciaDepartamento.id;
+    const crearUsuarioDTO=instanciaUsuarioCrear;
+    this.onSubmitUsuario.emit(crearUsuarioDTO);
+  }
+  cerrarModal(){
+    this.ref.close();
+  }
+  handleChange(e: any) {
+    let isChecked = e.checked;
+    this.formUsuario.value.is_staff = isChecked
+  }
+  OnDestroy(){
+    if(this.subDepartamentos){
+      this.subDepartamentos.unsubscribe();
+    }
   }
 
-  if(this.formUsuario.invalid){
-    this.messageService.add({severity:'error', summary: 'Error', detail: 'Debe completar todos los campos'});
-    return;
+  getCampoNoValido(campo: string) {
+    return this.formUsuario.get(campo)?.invalid && this.formUsuario.get(campo)?.touched;
   }
-
-}
-cerrarModal(){
-  this.ref.close();
-}
-handleChange(e: any) {
-  let isChecked = e.checked;
-  this.formUsuario.value.is_staff = isChecked
-}
-OnDestroy(){
-  if(this.subDepartamentos){
-    this.subDepartamentos.unsubscribe();
-  }
-}
-
-get departamentoNoValid(){return this.formUsuario.get('departamento_id')?.invalid && this.formUsuario.get('departamento_id')?.touched;}
-/* get email(){ return this.formUsuario.get('email');}
-get password(){ return this.formUsuario.get('password');}
-get password2(){ return this.formUsuario.get('password2');}
-get is_staff(){ return this.formUsuario.get('is_staff');} */
 }

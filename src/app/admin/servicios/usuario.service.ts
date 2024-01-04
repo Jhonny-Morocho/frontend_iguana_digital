@@ -24,7 +24,7 @@ export class UsuarioService {
 
   public crear(usuario: CrearUsuarioDTO) {
     debugger
-    return this.http.post<boolean>(`${this.apiURL}/register/`, usuario)  //envia el contenido del form al backend (web api)
+    return this.http.post<boolean>(`${this.apiURL}/users`, usuario)  //envia el contenido del form al backend (web api)
     .pipe(
       tap(() => {
         this._refresh$.next();  //esto se ejecuta antes de retorna la data al componente
