@@ -52,7 +52,6 @@ export class ListarUsuarioComponent implements OnInit, OnDestroy  {
   }
   cargarUsuarios():void{
     this.subCargarUsuarios=this.usuarioService.obtenerTodos().subscribe(usuarios=>{
-      debugger
       this.loading=false;
       this.listarUsuarios=usuarios.data;
     },error=>{

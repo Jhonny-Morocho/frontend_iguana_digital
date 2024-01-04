@@ -13,6 +13,15 @@ export interface LitarUsuarioDTO{
   apellido: string;
   usuario: string;
   email: string;
+  created_at: string;
+  updated_at: string;
+  departamento:DepartamentoDTO
+}
+export interface DepartamentoDTO{
+  id: number,
+  nombre: string,
+  created_at:string,
+  updated_at:string
 }
 export interface UsuarioDTO{
   id: number ;

@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { CrearUsuarioDTO, LitarUsuarioDTO, LoginUsuarioDTO, RecuperarPasswordDTO, UsuarioDTO } from '../usuario/usuario.model';
+import { CrearUsuarioDTO, LitarUsuarioDTO, UsuarioDTO } from '../usuario/usuario.model';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class UsuarioService {
-  private apiURL=environment.apiURL+'/auth';
+  private apiURL=environment.apiURL;
   private _refresh$ = new Subject<void>();
   constructor(public http: HttpClient, private router: Router) {
   }
@@ -36,6 +36,7 @@ export class UsuarioService {
 
 
   public crear(usuario: CrearUsuarioDTO) {
+    debugger
     return this.http.post<boolean>(`${this.apiURL}/register/`, usuario)  //envia el contenido del form al backend (web api)
     .pipe(
       tap(() => {
